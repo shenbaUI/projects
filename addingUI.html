@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Adding UI with services</title>
+	<script type="text/javascript" src="js/angular.min.js"></script>
+	<script type="text/javascript" src="js/addingui.js"></script>
+	<script type="text/javascript" src="js/addingservice.js"></script>
+</head>
+<body>
+	<div ng-app="addingUI" ng-controller="addingUIcontroller as invoice">
+		<div>
+			Quantity: <input type="text" ng-model="invoice.quantity">
+		</div>
+		<div>
+			Price: <input type="text" ng-model="invoice.price">
+		</div>
+		<div>
+			<select ng-model="invoice.currency">
+				<option ng-repeat="curr in invoice.foreigncurrency">{{curr}}</option>
+			</select>
+		</div>
+		<span>Total:</span>
+		<div ng-repeat="curr in invoice.foreigncurrency">
+			{{invoice.total(curr) | currency:curr}}
+		</div>
+		<button type="submit" ng-click="invoice.submit()">Submit</button>
+	</div>
+</body>
+</html>

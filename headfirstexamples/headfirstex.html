@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Head first example</title>
+	<link rel="stylesheet" type="text/css" href="css/headfirstex.css">
+</head>
+<body>
+	<p>The Total Amount is</p>
+	<p id="amt"></p>
+	<script>
+		var price = 50;
+		var discount = 5;
+		var total = price - (price * (discount / 100));
+
+		if(total  > 25){
+			freeShipping(total);
+		}
+
+		function freeShipping(total){
+			/*alert(total);*/
+			document.getElementById("amt").innerHTML=total;
+		}
+	</script>	
+</body>
+</html>
