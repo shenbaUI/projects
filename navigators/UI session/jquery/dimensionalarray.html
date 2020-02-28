@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Array</title>
+    <script
+    src="https://code.jquery.com/jquery-3.4.1.min.js"
+    integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+    crossorigin="anonymous"></script>
+</head>
+<body>
+    <div>
+        Enter the Dimension of array
+        <input type="number">
+        <button class="submitbtn">Submit</button>
+        <div class="arraylist"></div>
+    </div>
+    <script>
+        $(document).ready(function(){
+            $('.submitbtn').click(function(){
+                var userinput = $('input').val();
+                var squareMatrix = [];
+               
+                for(i=0;i<userinput;i++){
+                    squareMatrix[i]=new Array();
+                    for(j=0;j<userinput;j++){
+                        squareMatrix[i][j]=prompt("enter the values",j); 
+                                     
+                    }
+                }
+                // console.log(squareMatrix)   
+                for(i=0;i<squareMatrix.length;i++){
+                    for(j=0;j<squareMatrix.length;j++){
+                        console.log(squareMatrix[i][j])
+                        $('.arraylist').append('<span>'+squareMatrix[i][j]+' '+'</span>');
+                                                                                    
+                    }
+                    $('.arraylist').append('<br/>');
+                    
+                }
+            });
+        })
+    </script>
+</body>
+</html>
