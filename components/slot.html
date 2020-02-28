@@ -1,0 +1,28 @@
+<html>
+    <head>
+        <title>Example for slot</title>
+        <script src="https://cdn.jsdelivr.net/npm/vue@2.5.21/dist/vue.js"></script>
+    </head>
+    <body>
+        <div id="slot">
+            <alertbox>
+                Wrong input
+            </alertbox>
+        </div>
+        <script>
+            Vue.component('alertbox',{
+               
+                template : `
+                    <div>
+                        <span>ERROR !</span>
+                        <slot></slot>
+                    </div>
+                `
+               
+            })
+            new Vue({
+                el : "#slot"
+            })
+        </script>
+    </body>
+</html>

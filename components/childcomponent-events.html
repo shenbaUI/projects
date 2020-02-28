@@ -1,0 +1,44 @@
+<html>
+    <head>
+        <title>child component events</title>
+        <script src="https://cdn.jsdelivr.net/npm/vue@2.5.21/dist/vue.js"></script>
+    </head>
+    <body>
+        <div id="props">
+            <div :style="{ fontSize: postfontsize + 'em' }">
+                <propscomponent v-for="post in posts" v-bind:key="post.id" v-bind:post="post" v-on:increasefont="postfontsize += 0.1"></propscomponent>
+            </div>
+        </div>
+        <script>
+        //    By default it is increased by 0.1
+            Vue.component('propscomponent', {
+                props: ['post'],
+                template: `
+                    <div class="propscomponent">
+                    <h3>{{ post.title }}</h3>
+                    <button v-on:click="$emit('increasefont')"> Enlarge text </button>
+                    <div v-html="post.content"></div>
+                    </div>
+                `
+                })           
+
+            new Vue({
+                el : '#props',
+                data : {
+                    posts : [
+                        {
+                            id : 1, title : 'vue', content : 'content 1', publishedAt: 'date1'
+                        },
+                        {
+                            id : 2, title : 'props', content : 'content 2', publishedAt : 'date2'
+                        },
+                        {
+                            id : 3, title : 'component', content : 'content 3', publishedAt : 'date3'
+                        }
+                    ],
+                    postfontsize: 1
+                }
+            })
+        </script>
+    </body>
+</html>

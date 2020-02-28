@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Mutation Examples</title>
+	<script src="https://cdn.jsdelivr.net/npm/vue@2.5.21/dist/vue.js"></script>
+
+	<style>
+		.red{
+			color: red;
+		}
+		.blue{
+			color:blue;
+		}
+		.green{
+			color: green;
+		}
+		.gray{
+			color: gray;
+		}
+	</style>
+</head>
+<body>
+	<div id="app">
+		<p>{{message}}</p>
+		<ul type="square">
+			<li v-for="item in items">{{item}}</li>		
+		</ul>
+		<button v-on:click="counter++">Increase</button>
+		<button v-on:click="counter--">Decrease</button>
+		<button v-on:click="secondcounter++">Increase Count</button>
+		<p>{{ counter }} | {{secondcounter}}</p>
+		
+		<p>{{result()}} | {{output}}</p>
+
+		<div>
+			<p :class="{red : attachRed}" @click="attachRed = !attachRed">Adding color class</p>
+			<p :class="{red:attachRed}" @click="attachRed = !attachRed">Adding color</p>
+
+			<p :class="divClasses" @click="attachRed = !attachRed">Adding color class</p>
+			<p :class="{red:attachRed}" @click="attachRed = !attachRed">Adding color</p>
+
+			<p :class="[color,{red:attachRed}]">Green css</p>
+
+			<input type="text" v-model="color">
+
+			<p :style="{backgroundColor:bgcolor}">Dynamic color adding</p>
+
+			Dynamic color adding<input type="text" v-model="bgcolor">
+
+			<div :style="myStyle"></div>
+			<div :style="[myStyle,{height:width+'px'}]"></div>
+
+		</div>
+
+	</div>
+<script type="text/javascript">
+	new Vue({
+		el:"#app",
+		data:{
+			message:"welcome",
+			counter:0,
+			secondcounter:0,
+			attachRed:false,
+			color:'green',
+			bgcolor:'gray',
+			width:100,
+			height:100,
+			items:[
+			{
+				fruit : "orange",
+				vegetable : "carrot"
+			}],
+			
+		},
+		computed:{
+			output:function(){
+				console.log("computed property");
+				return this.counter > 5 ? 'Greater than 5' : 'Less than 5'
+			},
+			divClasses:function(){
+				return{
+					red: this.attachRed,
+					blue: !this.attachRed
+				}
+			},
+			myStyle:function(){
+				return {
+					width:this.width + 'px',
+					backgroundColor:this.bgcolor,
+					height:this.height + 'px'
+					
+				}
+			}
+		},
+		watch: {
+			counter:function(){
+				var vm = this;
+				setTimeout(function(){  // This keyword will not work inside callback function.So we assigned 'This' to some other variable.
+					vm.counter=0;
+				},2000);
+			}
+		},
+		methods:{
+			result:function(){
+				console.log("Normal methods");
+				return this.counter > 5 ? 'Greater than 5' : 'Less than 5'
+			}
+		}
+		
+	});
+</script>
+</body>
+</html>

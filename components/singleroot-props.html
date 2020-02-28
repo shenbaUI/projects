@@ -1,0 +1,40 @@
+<html>
+    <head>
+        <title>component With single root props</title>
+        <script src="https://cdn.jsdelivr.net/npm/vue@2.5.21/dist/vue.js"></script>
+    </head>
+    <body>
+        <div id="props">
+            <propscomponent v-for="post in posts" v-bind:key="post.id" v-bind:post="post"></propscomponent>
+        </div>
+        <script>
+           
+            Vue.component('propscomponent', {
+                props: ['post'],
+                template: `
+                    <div class="blog-post">
+                    <h3>{{ post.title }}</h3>
+                    <div v-html="post.content"></div>
+                    </div>
+                `
+                })           
+
+            new Vue({
+                el : '#props',
+                data : {
+                    posts : [
+                        {
+                            id : 1, title : 'vue', content : 'content 1', publishedAt: 'date1'
+                        },
+                        {
+                            id : 2, title : 'props', content : 'content 2', publishedAt : 'date2'
+                        },
+                        {
+                            id : 3, title : 'component', content : 'content 3', publishedAt : 'date3'
+                        }
+                    ]
+                }
+            })
+        </script>
+    </body>
+</html>

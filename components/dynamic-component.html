@@ -1,0 +1,117 @@
+<html>
+    <head>
+        <title>Dynamic components</title>
+        <script src="https://cdn.jsdelivr.net/npm/vue@2.5.21/dist/vue.js"></script>
+        <style>
+            .tab-button {
+                padding: 6px 10px;
+                border-top-left-radius: 3px;
+                border-top-right-radius: 3px;
+                border: 1px solid #ccc;
+                cursor: pointer;
+                background: #f0f0f0;
+                margin-bottom: -1px;
+                margin-right: -1px;
+                }
+                .tab-button:hover {
+                background: #e0e0e0;
+                }
+                .tab-button.active {
+                background: #e0e0e0;
+                }
+                .tab {
+                border: 1px solid #ccc;
+                padding: 10px;
+                }
+        </style>
+    </head>
+    <body>
+        <!-- <div id="dynamiccomponents">
+            <button v-for="tab in tabs" v-bind:key="tab" v-bind:class="['tab-button',{active: currentTab === tab}]"
+            v-on:click="currentTab = tab">{{tab}}
+            </button>
+            <component v-bind:is="currentTabComponent" class="tab">
+            </component>
+        </div>
+        <script>
+            Vue.component('tab-home',{
+                template: `
+                    <div> 
+                        This is home Tab
+                    </div>
+                `
+            })
+
+            Vue.component('tab-post',{
+                template:`
+                    <div>
+                        This is post Tab
+                    </div>
+                `
+            })
+
+            Vue.component('tab-archive',{
+                template: `
+                    <div>
+                        This is archive Tab
+                    </div>
+                `
+            })
+            new Vue({
+                el : '#dynamiccomponents',
+                data:{
+                    currentTab : 'Home',
+                    tabs : ['Home', 'Post', 'Archive']
+                },
+                computed:{
+                currentTabComponent : function(){
+                    return 'tab-'+this.currentTab.toLowerCase();
+                }
+            }
+            })       
+
+           
+        </script> -->
+
+        <!-- Other method for same output -->
+        <div id="dynamiccomponents">
+            <button v-for="tab in tabs"  v-bind:key="tab.name" v-bind:class="['tab-button', { active: currentTab.name === tab.name }]"
+            v-on:click="currentTab = tab" >{{ tab.name }}</button>
+        
+            <component
+                v-bind:is="currentTab.component"
+                class="tab"
+            ></component>
+        </div>
+        <script>
+            var tabs = [
+                {
+                    name: 'Home', 
+                    component: { 
+                    template: '<div>Home component</div>' 
+                    }
+                },
+                {
+                    name: 'Posts',
+                    component: {
+                    template: '<div>Posts component</div>'
+                    }
+                },
+                {
+                    name: 'Archive',
+                    component: {
+                    template: '<div>Archive component</div>',
+                    }
+                }
+                ]
+
+                new Vue({
+                el: '#dynamiccomponents',
+                data: {
+                    tabs: tabs,
+                    currentTab: tabs[0]
+                }
+                })
+        </script>
+    </body>
+</html>

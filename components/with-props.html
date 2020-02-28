@@ -1,0 +1,25 @@
+<html>
+    <head>
+        <title>component With props</title>
+        <script src="https://cdn.jsdelivr.net/npm/vue@2.5.21/dist/vue.js"></script>
+    </head>
+    <body>
+        <div id="props">
+            <propscomponent title="component with props"></propscomponent>
+            <propscomponent title="Welcome to props concept"></propscomponent>            
+        </div>
+        <script>
+           
+            Vue.component('propscomponent', {
+                props: ['title'],
+                template: `                   
+                    <h3>{{ title }}</h3>                    
+                `
+                })           
+
+            new Vue({
+                el : '#props'                
+            })
+        </script>
+    </body>
+</html>

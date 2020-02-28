@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    </head>
+    <body>
+        <div id="app1">
+            <h1>{{ title }}</h1>
+            <input type="text" v-model="title">
+            <hello></hello>
+        </div>
+        <div id="app2">
+            <h1>{{ title }}</h1>
+            <input type="text" v-model="title">
+            <button @click="instanceChange" ref="myButton">change</button>
+            <hello></hello>
+        </div>
+        <div id="app3">
+
+        </div>
+        <script>
+            var data1 = {
+                title : 'instance 1'
+            }
+            
+            // Global component.Can be used by any instances.
+
+            Vue.component('hello',{
+                template:'<h1>Hello</h1>'
+            })
+
+            var vm1 = new Vue({
+                // el : '#app1',
+                data : data1
+            });
+            
+            setTimeout(function(){
+                vm1.title = "outside instance"
+            },3000);
+
+
+           var vm2 = new Vue({
+                // el : '#app2',
+                data : {
+                    title : 'instance 2'
+                },
+                methods:{
+                    instanceChange : function(){
+                        vm1.title = "instance changed"
+                        this.$refs.myButton.innerText = 'refBtn'
+                    }
+                }
+            });
+
+            var vm3 = new Vue({
+                template:`<h1>Instance 3 template div</h1>`
+            });
+
+           
+            vm3.$mount();
+            document.getElementById('app3').appendChild(vm3.$el);
+
+            vm1.$mount('#app1');
+            vm2.$mount('#app2');
+          
+            vm1.newprop = "new"; /* we can create new property outside of the instance.But it doesn't have getter and setter methods.
+                                     By defautl all the properties are having getter and setter methods.  */
+            
+            console.log(vm1);
+
+            console.log(vm1.$data.title)
+
+            console.log(vm2.title);
+
+            console.log(vm1.$data === data1);
+
+            vm2.$refs.myButton.innerText = 'refButton'
+        </script>
+    </body>
+</html>

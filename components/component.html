@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Component Basics</title>
+	<script src="https://cdn.jsdelivr.net/npm/vue@2.5.21/dist/vue.js"></script>
+</head>
+<body>
+
+	<div id="componentbasic">
+		<button-counter></button-counter>
+		<button-counter></button-counter>
+	</div>
+
+<script type="text/javascript">
+
+	
+Vue.component('button-counter', {
+  data: function () {
+    return {
+      count: 0
+    }
+  },
+  template: '<button v-on:click="count++">You clicked me {{ count }} times.</button>'
+	})
+	new Vue({
+		el:'#componentbasic',
+
+		})
+	
+	
+</script>
+</body>
+</html>

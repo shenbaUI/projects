@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>form inputs Examples</title>
+	<script src="https://cdn.jsdelivr.net/npm/vue@2.5.21/dist/vue.js"></script>
+</head>
+<body>
+	<div id="app">		
+		<input type="checkbox" id="apple" value="Apple" v-model="checkedValues">
+		<label for="apple">Apple</label>
+		<label>Orange
+			<input type="checkbox" value="Orange" v-model="checkedValues">
+		</label>
+		<label>Grapes
+			<input type="checkbox" value="Grapes" v-model.lazy="checkedValues">
+		</label><br>
+		<label>
+			<input v-model.number="uservalue">
+		</label>
+
+		<span>checkedValues : {{checkedValues}}</span>
+	</div>
+<script type="text/javascript">
+	new Vue({
+		el:"#app",
+		data:{
+		
+			checkedValues:[],
+			uservalue : "shenba"
+		}
+	})
+</script>
+</body>
+</html>

@@ -1,0 +1,27 @@
+<html>
+    <head>
+        <title>Components with custom events</title>
+        <script src="https://cdn.jsdelivr.net/npm/vue@2.5.21/dist/vue.js"></script>
+    </head>
+    <body>
+        <div id="props">
+            <customevents v-model="searchText"></customevents>
+        </div>
+        <script>
+            Vue.component('customevents',{
+                props : ['value'],
+                template : `
+                    <input v-bind:value="value" 
+                    v-on:input="$emit('input',$event.target.value)">                    
+                `
+            })
+
+            new Vue({
+                el : '#props',
+                data : {
+                   searchText : 'shenba'
+                }
+            })
+        </script>
+    </body>
+</html>

@@ -1,0 +1,44 @@
+<html>
+    <head>
+        <title>emit function value passing</title>
+        <script src="https://cdn.jsdelivr.net/npm/vue@2.5.21/dist/vue.js"></script>
+    </head>
+    <body>
+        <div id="props">
+            <div :style="{ fontSize: postfontsize + 'em' }">
+                <propscomponent v-for="post in posts" v-bind:key="post.id" v-bind:post="post" v-on:increasefont="postfontsize += $event"></propscomponent>
+            </div>
+        </div>
+        <script>
+        //    added second parameter for emit function to change fontsize dynamically
+            Vue.component('propscomponent', {
+                props: ['post'],
+                template: `
+                    <div class="propscomponent">
+                    <h3>{{ post.title }}</h3>
+                    <button v-on:click="$emit('increasefont',0.1)"> Enlarge text </button> 
+                    <div v-html="post.content"></div>
+                    </div>
+                `
+                })           
+
+            new Vue({
+                el : '#props',
+                data : {
+                    posts : [
+                        {
+                            id : 1, title : 'vue', content : 'content 1', publishedAt: 'date1'
+                        },
+                        {
+                            id : 2, title : 'props', content : 'content 2', publishedAt : 'date2'
+                        },
+                        {
+                            id : 3, title : 'component', content : 'content 3', publishedAt : 'date3'
+                        }
+                    ],
+                    postfontsize: 1
+                }
+            })
+        </script>
+    </body>
+</html>
